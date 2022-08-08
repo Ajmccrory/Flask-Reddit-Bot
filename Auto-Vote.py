@@ -5,9 +5,7 @@ import requests.auth
 import urllib.parse
 CLIENT_ID = "z1JXO0p5TF-W3I0q3LhE4Q"
 CLIENT_SECRET = "6wPxWGoScMC93fIrIASUQC1fdWt19w,"
-REDIRECT_URI = "https://localhost:65010/reddit_callback"
-
-session["user_state"] = "none"
+REDIRECT_URI = "https://localhost:5000/reddit_callback"
 
 def user_agent(ajmccrory1):
     '''
@@ -21,8 +19,8 @@ def base_headers():
     return {"User-Agent": user_agent()}
 
 app = Flask(__name__)
-@app.route('/index')
-def index():
+@app.route('/')
+def homepage():
     authurl =  make_authorization_url()
     return render_template("index.html", content=authurl)
 
@@ -41,8 +39,7 @@ def make_authorization_url():
 
 #these are empty now, but need to be updated later to store session state in db or memcache
 def save_created_state(state):
-    session.pop("user_state", state)
-    return redirect(url_for("reddit_callback"))
+    pass
 def is_valid_state(state):
     return True
 
@@ -57,9 +54,14 @@ def reddit_callback():
         abort(403)
     code = request.args.get('code')
     access_token = get_token(code)
-    #PLEASE STORE THIS IN A SESSION JESUS CHRIST
     user = get_username(access_token)
-    return render_template("reddit_callback.html", context=user)
+    return get_username(access_token)
+    
+
+@app.route("/<usr>")
+def user(usr):
+    return f"<h1>{usr}</h1>"
+
 
 
 def get_token(code):
@@ -80,9 +82,9 @@ def get_username(access_token):
     headers.update({"Authorization": "bearer " + access_token})
     response = requests.get("https://oauth.reddit.com/api/v1/me", headers=headers)
     me_json = response.json()
-    return me_json['name']
+    return redirect(url_for("user", usr=me_json))
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=65010)
+    app.run(debug=True, port=5000)
