@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Auto-Vote{% endblock %}
+    {% block content1 %}
+    The actions have been performed.
+    <form method="post">
+        <label for="continue">Would you like to continue</label>
+        <input type="checkbox"
+        name="continue"
+        value="{{ request.form['continue'] }}"/>
+        <label for="pass">Select this to terminate</label>
+        <input type="checkbox"
+        name="pass"
+        value="{{ request.form['pass'] }}"/>
+    </form>
+    {% endblock %}
