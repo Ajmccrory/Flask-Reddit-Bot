@@ -5,50 +5,44 @@ import json
 
 app = Flask(__name__)
 app.secret_key = str(uuid4())
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def homepage():
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        session['password'] = request.form['password']
-        session['redditor'] = request.form['redditor']
-        session['Number'] = request.form['Number']
-        return redirect(url_for('vote_req', session=session))
-
     return render_template("index.html")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['user']
+        session['password'] = request.form['password']
+        session['comment_id'] = request.form['comment_id']
+        session['Number'] = request.form['Number']
+        return redirect(url_for('vote_req'))
+
 
 
 @app.route('/vote_req', methods=['GET', 'POST'])
 def vote_req():
     if request.method == 'POST':
-        return redirect(url_for('get_credentials', session=session))
-    if 'username' not in session:
-        return redirect(url_for('homepage'))
-
-@app.route('/get_credentials',methods=['GET','POST'])
-def get_credentials():
-    render_template("credntials.html")
-    if request.method == 'POST':
         session['client_id'] = request.form['client_id']
         session['client_secret'] = request.form['client_secret']
-        return create_request(session)
+        return create_request()
+    return render_template("credentials.html")
 
 def create_request():
     render_template("creating.html")
     user_name = str(session['username'])
     password = str(session['password'])
-    redditor = str(session['redditor'])
+    comment_id = str(session['comment_id'])
     Number = int(session['Number'])
     client_id = str(session['client_id'])
     client_secret = str(session['client_secret'])
-    user_agent = "Auto-Vote by /u/%s" % user_name
     credentials = {
         "user_name": user_name,
         "password": password,
-        "redditor": redditor,
+        "comment_id": comment_id,
         "Number": Number,
         "client_id": client_id,
         "client_secret": client_secret,
-        "user_agent": user_agent,
     }
     with open("credentials.json", "w") as jsonFile:
         json.dump(credentials, jsonFile)
@@ -60,14 +54,18 @@ def perform_actions():
     render_template("performing.html")
     return reddit_client.main()
 
-@app.route('/actions_performed', methods=['POST'])
+@app.route('/actions_performed', methods=['GET','POST'])
 def actions_performed():
     render_template("performed.html")
     if request.form['continue'] == True:
         print('running again')
         return reddit_client.main()
+    if request.form['pass'] == True:
+        return render_template("thank.html")
+    else:
+        error = request.args.get('error', '')
+        update = print('We have run into an error:' + error)
+        return render_template("error.html", update=update)
 
-    return render_template("thank.html")
-        
 if __name__ == '__main__':
     app.run(debug=True, port=65010)
