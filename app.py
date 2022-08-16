@@ -1,7 +1,7 @@
 from flask import Flask, abort, request, render_template, redirect, url_for, session
 from uuid import uuid4
-import reddit_client
 import json
+from bot import RedditClient
 
 app = Flask(__name__)
 app.secret_key = str(uuid4())
@@ -14,7 +14,7 @@ def login():
     if request.method == 'POST':
         session['username'] = request.form['user']
         session['password'] = request.form['password']
-        session['comment_id'] = request.form['comment_id']
+        session['subreddit_name'] = request.form['subreddit_name']
         session['Number'] = request.form['Number']
         return redirect(url_for('vote_req'))
 
@@ -32,14 +32,14 @@ def create_request():
     render_template("creating.html")
     user_name = str(session['username'])
     password = str(session['password'])
-    comment_id = str(session['comment_id'])
+    subreddit_name = str(session['subreddit_name'])
     Number = int(session['Number'])
     client_id = str(session['client_id'])
     client_secret = str(session['client_secret'])
     credentials = {
         "user_name": user_name,
         "password": password,
-        "comment_id": comment_id,
+        "subreddit_name": subreddit_name,
         "Number": Number,
         "client_id": client_id,
         "client_secret": client_secret,
@@ -49,17 +49,24 @@ def create_request():
     return redirect(url_for('perform_actions'))
 
 
-@app.route('/perform_actions')
+@app.route('/perform_actions', methods=['GET', 'POST'])
 def perform_actions():
-    render_template("performing.html")
-    return reddit_client.main()
+    if request.method == 'GET':
+        with open('credentials.json') as creds:
+            data = json.load(creds)
+            sub_reddit = data['subreddit_name']
+            Number = data['Number']
+            bot = RedditClient()
+    return bot.work_on_subreddit(sub_reddit, limit=Number) and render_template("performing.html")
+    
+
 
 @app.route('/actions_performed', methods=['GET','POST'])
 def actions_performed():
     render_template("performed.html")
     if request.form['continue'] == True:
         print('running again')
-        return reddit_client.main()
+        return redirect('homepage')
     if request.form['pass'] == True:
         return render_template("thank.html")
     else:
