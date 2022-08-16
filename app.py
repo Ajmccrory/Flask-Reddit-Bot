@@ -46,18 +46,23 @@ def create_request():
     }
     with open("credentials.json", "w") as jsonFile:
         json.dump(credentials, jsonFile)
-    return redirect(url_for('perform_actions'))
+    return redirect(url_for('perform'))
 
-
-@app.route('/perform_actions', methods=['GET', 'POST'])
-def perform_actions():
-    if request.method == 'GET':
-        with open('credentials.json') as creds:
+@app.route('/perform', methods=['GET', 'POST'])
+def perform():
+    with open('credentials.json') as creds:
             data = json.load(creds)
             sub_reddit = data['subreddit_name']
             Number = data['Number']
             bot = RedditClient()
-    return bot.work_on_subreddit(sub_reddit, limit=Number) and render_template("performing.html")
+            bot.work_on_subreddit(sub_reddit, limit=Number)
+            return redirect(url_for('perform_actions'))
+
+
+
+@app.route('/perform_actions')
+def perform_actions():
+    return render_template("performing.html")
     
 
 
