@@ -1,7 +1,8 @@
 from flask import Flask, abort, request, render_template, redirect, url_for, session
 from uuid import uuid4
 import json
-from bot import RedditClient
+import execute
+
 
 app = Flask(__name__)
 app.secret_key = str(uuid4())
@@ -50,34 +51,11 @@ def create_request():
 
 @app.route('/perform', methods=['GET', 'POST'])
 def perform():
-    with open('credentials.json') as creds:
-            data = json.load(creds)
-            sub_reddit = data['subreddit_name']
-            Number = data['Number']
-            bot = RedditClient()
-            bot.work_on_subreddit(sub_reddit, limit=Number)
-            return redirect(url_for('perform_actions'))
-
-
-
-@app.route('/perform_actions')
-def perform_actions():
-    return render_template("performing.html")
-    
-
-
-@app.route('/actions_performed', methods=['GET','POST'])
-def actions_performed():
-    render_template("performed.html")
-    if request.form['continue'] == True:
-        print('running again')
-        return redirect('homepage')
-    if request.form['pass'] == True:
-        return render_template("thank.html")
+    if request.method == 'GET':
+        execute.main_execution()
     else:
-        error = request.args.get('error', '')
-        update = print('We have run into an error:' + error)
-        return render_template("error.html", update=update)
+        return ('there seems to be a problem')
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=65010)
+    app.run(host='0.0.0.0', debug=True, port=65010)
