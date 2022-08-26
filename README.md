@@ -1,3 +1,5 @@
+*** current download/run process ***
+
 --> download the flask app 
 
 --> delete the example file for credentials and create your own credentials.json and submission.json
