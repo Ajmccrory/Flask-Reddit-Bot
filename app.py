@@ -1,7 +1,16 @@
-from flask import Flask, abort, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session
 from uuid import uuid4
 import json
 import execute
+
+"""
+This is a flask program that executes bot functions through
+a frontend interface. 
+
+Author: AJ McCrory
+Version: 4.0.1 8/25/2022
+"""
+
 
 
 app = Flask(__name__)
