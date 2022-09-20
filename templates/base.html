@@ -36,23 +36,19 @@
                 <form method="post">
                     <label for="user">Enter your reddit username</label>
                         <input type="text" name="user"
-                        placeholder="username"
-                        value="{{ request.form['username'] }}">
+                        placeholder="username">
                         <br>
                     <label for="password">Enter your reddit password</label>
                         <input type="password" name="password"
-                        placeholder="password"
-                        value="{{ request.form['password'] }}">
+                        placeholder="password">
                         <br>
                         <label for="redditor">Users comments you would like to upvote</label>
                         <input type="text" name="redditor"
-                                placeholder="redditor"
-                                value="{{ request.form['redditor'] }}">
+                                placeholder="redditor">
                         <br>
                         <label for="Number">Number of comments to upvote</label>
-                        <input type="number" name="Number"
-                                placeholder="max is 60"
-                                value="{{ request.form['Number'] }}"></input>
+                        <input type="number" name="number"
+                                placeholder="max is 60"></input>
                                 <br>
                     <button action="/" type="submit">Perform Authorization</button>
                 </form>
