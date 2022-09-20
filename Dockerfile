@@ -6,6 +6,8 @@ WORKDIR /reddit-flask
 
 COPY requirements.txt requirements.txt
 
+RUN pip3 install praw
+
 RUN pip3 install -r requirements.txt
 
 COPY . .
