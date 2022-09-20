@@ -1,19 +1,13 @@
 # syntax=docker/dockerfile:1
-FROM python:3.8-alpine
 
-# copy the requirements file into image
-COPY ./requirements.txt /app/requirements.txt
+FROM python:3.8-slim-buster
 
-# switch to working dir
-WORKDIR /app
+WORKDIR /reddit-flask
 
-# install dependencies and packages
-RUN pip install -r requirements.txt
+COPY requirements.txt requirements.txt
 
-# copy from local to image
-COPY . /app
+RUN pip3 install -r requirements.txt
 
-# configure the container to run in an executed manner
-ENTRYPOINT [ "python" ]
+COPY . .
 
-CMD [ "python3", "-m", "flask", "run", "-p", "65010", "--host=0.0.0.0"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
