@@ -36,7 +36,6 @@ def vote_req():
     
 
 def create_request():
-    render_template("creating.html")
     user_name = str(session['username'])
     password = str(session['password'])
     subreddit_name = str(session['subreddit_name'])
@@ -58,6 +57,7 @@ def create_request():
 @app.route('/perform', methods=['GET', 'POST'])
 def perform():
     if request.method == 'GET':
+        render_template("performing.html")
         execute.main_execution()
     else:
         return redirect(url_for('error'))
