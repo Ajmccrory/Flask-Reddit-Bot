@@ -6,6 +6,8 @@ Build the Docker image manually by cloning the Git repo.
 ```
 $ git clone https://github.com/Ajmccrory/Red-Vote-Flask
 $ cd Red-Vote-Flask
+$ python3 -m venv venv
+$ source venv/bin/activate
 $ sudo docker build -t reddit-flask .
 ```
 ### Create Reddit-App
@@ -19,7 +21,7 @@ https://old.reddit.com/prefs/apps
 ### Run the container
 Create a container from the image.
 ```
-$ docker run <name of container>
+$ sudo docker run reddit-flask
 ```
 * Now visit http://<address from docker cli>
 ![run-in-cli](https://user-images.githubusercontent.com/93270610/191367840-6f040530-1265-4449-a601-38a8c3858aad.png)
