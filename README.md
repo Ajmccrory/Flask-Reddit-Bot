@@ -8,6 +8,7 @@ $ git clone https://github.com/Ajmccrory/Red-Vote-Flask
 $ cd Red-Vote-Flask
 $ python3 -m venv venv
 $ source venv/bin/activate
+$ pip install praw
 $ sudo docker build -t reddit-flask .
 ```
 ### Create Reddit-App
