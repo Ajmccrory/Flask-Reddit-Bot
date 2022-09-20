@@ -25,10 +25,14 @@ $ docker run --name my-container -d -p 65010:65010 reddit-flask
 ### Use the bot
 * Fill out the bot with your reddit information used to set up your personal use script.
 * I reccomend using FreeKarma4u, as a subreddit for the bot to search through.
-![app-homepage-filled](https://user-images.githubusercontent.com/93270610/191363054-2f452828-6033-425a-af2a-648c779a0334.png)
+
+![app-homepage-filled](https://user-images.githubusercontent.com/93270610/191364902-2b3914f1-23d0-4f5a-b65b-72dfb432f6c4.png)
+
 * Fill out the vote request page with the Client ID and Secret obtained from the reddit app
-![app-vote-req](https://user-images.githubusercontent.com/93270610/191363063-1967107c-6b6c-42d6-aa68-d4fd322d5db7.png)
-The app will then begin to return information in the CLI
-You can see the Karma return and comments appearing in your Reddit after the app has run.
+
+![app-vote-req](https://user-images.githubusercontent.com/93270610/191364934-42a969bf-9775-4591-891e-912ced2bc0d3.png)
+
+* The app will then begin to return information in the CLI
+* You can see the Karma return and comments appearing in your Reddit after the app has run.
 
 
