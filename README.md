@@ -43,5 +43,7 @@ $ docker run <name of container>
 ```
 $ docker stop <name of container>
 ```
+## or
+* Simply exit the CLI window to stop processes.
 
 
