@@ -18,11 +18,15 @@ https://old.reddit.com/prefs/apps
 ### Run the container
 Create a container from the image.
 ```
-$ docker run --name my-container -d -p 65010:65010 reddit-flask
+$ docker run <name of container>
 ```
-* Now visit http://localhost:65010
-![app-homepage](https://user-images.githubusercontent.com/93270610/191361501-282eebf2-729f-43a0-8572-1cdaaaced16a.png)
+* Now visit http://172.17.0.3:5000
+![run-in-cli](https://user-images.githubusercontent.com/93270610/191367840-6f040530-1265-4449-a601-38a8c3858aad.png)
+
 ### Use the bot
+
+![app-homepage](https://user-images.githubusercontent.com/93270610/191361501-282eebf2-729f-43a0-8572-1cdaaaced16a.png)
+
 * Fill out the bot with your reddit information used to set up your personal use script.
 * I reccomend using FreeKarma4u, as a subreddit for the bot to search through.
 
@@ -34,5 +38,10 @@ $ docker run --name my-container -d -p 65010:65010 reddit-flask
 
 * The app will then begin to return information in the CLI
 * You can see the Karma return and comments appearing in your Reddit after the app has run.
+### To stop
+* open a seperate terminal window and execute the following command
+```
+$ docker stop <name of container>
+```
 
 
