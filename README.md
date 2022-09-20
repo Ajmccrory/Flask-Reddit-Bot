@@ -2,13 +2,12 @@
 Requested was a locally runable reddit bot with an easily accessible and adaptable Frontend. Python best communicates with Reddit's API, thus the Front end is written in Flask.
 
 ### Build application
-Build the Docker image manually by cloning the Git repo.
+Build the Docker image manually by cloning the Git repo, and set up the venv with the necessary dependencies.
 ```
 $ git clone https://github.com/Ajmccrory/Red-Vote-Flask
 $ cd Red-Vote-Flask
 $ python3 -m venv venv
 $ source venv/bin/activate
-$ pip install praw
 $ sudo docker build -t reddit-flask .
 ```
 ### Create Reddit-App
