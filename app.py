@@ -15,35 +15,32 @@ Version: 4.0.1 8/25/2022
 
 app = Flask(__name__)
 app.secret_key = str(uuid4())
-@app.route('/')
-def homepage():
-    return render_template("index.html")
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/', methods=['GET', 'POST'])
+def homepage():
     if request.method == 'POST':
         session['username'] = request.form['user']
         session['password'] = request.form['password']
-        session['subreddit_name'] = request.form['subreddit_name']
-        session['Number'] = request.form['Number']
+        session['subreddit_name'] = request.form['redditor']
+        session['number'] = request.form['number']
         return redirect(url_for('vote_req'))
+    return render_template("index.html")
 
-
-
-@app.route('/vote_req', methods=['GET', 'POST'])
+@app.route('/vote_req', methods=['GET','POST'])
 def vote_req():
     if request.method == 'POST':
         session['client_id'] = request.form['client_id']
         session['client_secret'] = request.form['client_secret']
         return create_request()
     return render_template("credentials.html")
+    
 
 def create_request():
     render_template("creating.html")
     user_name = str(session['username'])
     password = str(session['password'])
     subreddit_name = str(session['subreddit_name'])
-    Number = int(session['Number'])
+    Number = int(session['number'])
     client_id = str(session['client_id'])
     client_secret = str(session['client_secret'])
     credentials = {
@@ -63,8 +60,15 @@ def perform():
     if request.method == 'GET':
         execute.main_execution()
     else:
-        return ('there seems to be a problem')
+        return redirect(url_for('error'))
+
+
+@app.route('/error')
+def error():
+    return render_template("error.html")
+
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=65010)
+    app.debug = True
+    app.run(host='0.0.0.0', port=65010)
