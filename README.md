@@ -1,24 +1,26 @@
-*** current download/run process ***
+# Reddit-Vote-Flask
+Requested was a locally runable reddit bot with an easily accessible and adaptable Frontend. Python best communicates with Reddit's API, thus the Front end is written in Flask.
 
---> download the flask app including all folders
+### Build application
+Build the Docker image manually by cloning the Git repo.
+```
+$ git clone https://github.com/Ajmccrory/Red-Vote-Flask
+$ docker build -t python/docker .
+```
+### Create Reddit-App
+```
+https://old.reddit.com/prefs/apps
+```
+* scroll to bottom of page, and create a new app as a developer
+* Make the app a personal use script
+* Make the redirect URI http://localhost:65010/perform
 
---> delete the example file for credentials and create your own credentials.json and submission.json
+### Run the container
+Create a container from the image.
+```
+$ 
+```
 
-** build docker folder**
-** run docker image of app **
+Now visit http://localhost:65010
 
-** reddit credentials **
-
-navigate to reddit.com/prefs/apps
-
-create a reddit script app
-
-copy and paste your client id and client secret into app when prompted
-
-
-
-
-
-
-
-
+### Use the bot
