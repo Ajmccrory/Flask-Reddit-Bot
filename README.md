@@ -20,7 +20,7 @@ Create a container from the image.
 ```
 $ docker run <name of container>
 ```
-* Now visit http://172.17.0.3:5000
+* Now visit http://<address from docker cli>
 ![run-in-cli](https://user-images.githubusercontent.com/93270610/191367840-6f040530-1265-4449-a601-38a8c3858aad.png)
 
 ### Use the bot
