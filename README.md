@@ -49,4 +49,8 @@ $ docker stop <name of container>
 ## or
 * Simply exit the CLI window to stop processes.
 
-
+## FAQ
+* ERROR- "looks like you've been doing that a lot. Take a break for 9 minutes before trying again." on field 'ratelimit'
+** This error is because the account was too new, try with an older account. Or exit the bot, and run again in 5 minutes.
+* ERROR - prawcore.exceptions.ResponseException: recieved 401 HTTP response
+** This error is indicates an authorization issue. Check your password, usernmae, client id, and client secret in your credentials.json to verify they are correct. If they are correct, try installing praw inside of the venv and container the instance is running in.
