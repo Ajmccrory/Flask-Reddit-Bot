@@ -1,5 +1,5 @@
 # Reddit-Vote-Flask
-Requested was a locally runable reddit bot with an easily accessible and adaptable Frontend. Python best communicates with Reddit's API, thus the Front end is written in Flask.
+This is a locally runnable Reddit bot built using flask that connects to a webserver and Reddit's API. This bot allows the user to perform different Reddit actions for the purpose of building Karma. This was designed for corporate use for a private client.
 - [Build](#build)
 - [Usage](#usage)
 - [FAQ](#faq)
