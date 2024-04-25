@@ -1,7 +1,12 @@
 # Reddit-Vote-Flask
 Requested was a locally runable reddit bot with an easily accessible and adaptable Frontend. Python best communicates with Reddit's API, thus the Front end is written in Flask.
+- [Build](#build)
+- [Usage](#usage)
+- [FAQ](#faq)
 
-### Build application
+
+
+## Build
 Build the Docker image manually by cloning the Git repo, and set up the venv with the necessary dependencies.
 ```
 $ git clone https://github.com/Ajmccrory/Red-Vote-Flask
@@ -26,7 +31,7 @@ $ sudo docker run reddit-flask
 * Now visit http://<address from docker cli>
 ![run-in-cli](https://user-images.githubusercontent.com/93270610/191367840-6f040530-1265-4449-a601-38a8c3858aad.png)
 
-### Use the bot
+## Usage
 
 ![app-homepage](https://user-images.githubusercontent.com/93270610/191361501-282eebf2-729f-43a0-8572-1cdaaaced16a.png)
 
@@ -46,7 +51,7 @@ $ sudo docker run reddit-flask
 ```
 $ docker stop <name of container>
 ```
-## or
+### or
 * Simply exit the CLI window to stop processes.
 
 ## FAQ
