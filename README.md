@@ -10,7 +10,7 @@ This is a locally runnable Reddit bot built using flask that connects to a webse
 Build the Docker image manually by cloning the Git repo, and set up the venv with the necessary dependencies.
 ```
 $ git clone https://github.com/Ajmccrory/Flask-Reddit-Bot
-$ cd Red-Vote-Flask
+$ cd Flask-Reddit-Bot
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ sudo docker build -t reddit-flask .
