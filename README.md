@@ -22,7 +22,7 @@ https://old.reddit.com/prefs/apps
 ```
 * Scroll to bottom of page, and create a new app as a developer
 * Make the app a personal use script
-* Make the redirect URI http://"<local container URL>"/perform
+* Make the redirect URI http://"local container URL"/perform
 ### Run the container
 Create a container from the image.
 ```
